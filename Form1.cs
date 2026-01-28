@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CardIdentifier
+namespace CarRentalApp
 {
     public partial class Form1 : Form
     {
@@ -17,34 +17,36 @@ namespace CardIdentifier
             InitializeComponent();
         }
 
-        private void pbCard1_Click(object sender, EventArgs e)
+        private void BtnSelect_Click(object sender, EventArgs e)
         {
-            lbCardName.Text = "King of Spades";
+            int numberOfCars;
+            if(LstCarType.SelectedIndex == -1)
+            {
+                MessageBox.Show("No car type has been selected.");
+            }
+            else if(!int.TryParse(tbNumCars.Text, out numberOfCars))
+            {
+                MessageBox.Show("Invalid number of cars.");
+            }
+            else
+            {
+                lblQuote.Text = LstCarType.SelectedItem.ToString();
+                lblQuote.Text += " x " + numberOfCars.ToString();
+                
+
+            }
+            
         }
 
-        private void pbCard2_Click(object sender, EventArgs e)
-        {
-            lbCardName.Text = "Ace of Spades";
-        }
-
-        private void pbCard3_Click(object sender, EventArgs e)
-        {
-            lbCardName.Text = "2 of Clubs";
-        }
-
-        private void pbCard4_Click(object sender, EventArgs e)
-        {
-            lbCardName.Text = "8 of Diamonds";
-        }
-
-        private void pbCard5_Click(object sender, EventArgs e)
-        {
-            lbCardName.Text = "Black Joker";
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
+        private void BtnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void BtnClear_Click(object sender, EventArgs e)
+        {
+            lblQuote.Text = "";
+            tbNumCars.Text = "0";
         }
     }
 }
